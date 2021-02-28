@@ -1,8 +1,5 @@
 var textInputValues = ["", "", "", "", "", "", "", "", ""];
 var hour = moment().hour();
-if(localStorage.getItem('task')) {
-    textInputValues = JSON.parse(localStorage.getItem('task'));
-}
 
 //function to retrieve current day
 var currentDay = function() {
@@ -13,17 +10,24 @@ var currentDay = function() {
     $("#currentDay").append(now);
 };
 
-//loop through textInputValues array to fill correct textareas
-for(var i = 0; i < textInputValues.length; i++) {
-    $("#" + i).append(textInputValues[i]);
-    if (9 + i < hour) {
-        $("#" + i).addClass('past');
-    } else if (9 + i > hour) {
-        $("#" + i).addClass('future');
-    } else if (9 + i === hour) {
-        $("#" + i).addClass('present');
+var updateTasks = function() {
+    if(localStorage.getItem('task')) {
+        textInputValues = JSON.parse(localStorage.getItem('task'));
     }
-}
+
+    //loop through textInputValues array to fill correct textareas
+    for(var i = 0; i < textInputValues.length; i++) {
+        $("#" + i).append(textInputValues[i]);
+        if (9 + i < hour) {
+            $("#" + i).addClass('past');
+        } else if (9 + i > hour) {
+            $("#" + i).addClass('future');
+        } else if (9 + i === hour) {
+            $("#" + i).addClass('present');
+        }
+    }
+};
+
 
 //save button is clicked
 $(".saveBtn").click(function(event) {
@@ -47,8 +51,9 @@ var saveTasks = function() {
 };
 
 var loadTasks = function() {
-    tasks = JSON.parse(localStorage.getItem("task"));
-}
+    localStorage.getItem("task", JSON.stringify(textInputValues));
+};
+
 
 currentDay();
-
+updateTasks();
