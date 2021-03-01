@@ -7,4 +7,4 @@ Web Application to organize tasks for the work day.
 https://jadenrobison8.github.io/super-disco/
 
 ## Screenshot
-![screenshot](schedule screenshot.png)
+![screenshot](/assets/images/scheduleScreenshot.png)
